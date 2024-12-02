@@ -3,25 +3,28 @@
  *
  * @brief 
  *
- *
+ * @author Gael Esparza Lobatos
  *
  */
  
  #include "SR_Sensor_Interrupt.h"
+
+
+volatile int motion_detected = 0;
 
 void Sensor_Interrupt_Init(void)
  {
 	 // Enable port B
 	 SYSCTL->RCGCGPIO |= 0x02;
 	 
-	 // Initialize PB0 as an output
+	 // Initialize PB0 as an input
 	 GPIOB->DIR &= ~0x01;
 	 
 	 // Enables digital function for PB0
 	 GPIOB->DEN |= 0x01;
 	 
-	 // Enables pull-up resistor for PB0
-	 GPIOB->PUR |= 0x01;
+	 // Enables pull-down resistor for PB0
+	 GPIOB->PDR |= 0x01;
 	 
 	 // Edge-Sensitive
 	 GPIOB->IS &= ~0x01;
@@ -32,12 +35,13 @@ void Sensor_Interrupt_Init(void)
 	 // Rising edge trigger
 	 GPIOB-> IEV |= 0x01;
 	 
-	 // CLear interrupts
+	 // CLears prior interrupts
 	 GPIOB->ICR |= 0x01;
 	 
 	 // Enable interrupt for PB0
 	 GPIOB->IM |= 0x01;
 	 
+	 // Enables GPIO port B interrupt in NVIC
 	 NVIC->ISER[0] |= (1 << 1);
  }
  
@@ -48,7 +52,10 @@ void Sensor_Interrupt_Init(void)
 		 // Clear interrupt
 		 GPIOB->ICR |= 0x01;
 		 GPIOB->DATA |= 0x02;
+		 
+		 motion_detected = 1;
 	 }
+	 
  }
  
  

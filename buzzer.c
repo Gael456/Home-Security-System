@@ -11,7 +11,7 @@
  const uint8_t BUZZER_OFF = 0x00;
  const uint8_t BUZZER_ON = 0x10;
  
- const double NOTE = 440.0;
+
  
  void Buzzer_Init(void)
  {
@@ -44,7 +44,6 @@
 	
 	//Calculates the period in microseconds
 	int period_us = (int) (((double)1/note) * ((double)1000000));
-	
 	int half_period_us = period_us / 2;
 	
 	for(unsigned int i = 0; i < duration; i++) {
