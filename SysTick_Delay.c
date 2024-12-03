@@ -11,7 +11,6 @@
 
 static uint32_t us_elapsed = 0;
 
-// Global flag used to indicate if milliseconds delay is active
 static uint8_t ms_active = 0;
 
 static uint32_t ms_elapsed = 0;

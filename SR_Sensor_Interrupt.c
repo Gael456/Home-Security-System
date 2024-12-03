@@ -1,7 +1,7 @@
 /**
  * @file Sr_Sensor_Interrupt.c
  *
- * @brief 
+ * @brief Driver for the HC-SR501 PIR Motion Detector
  *
  * @author Gael Esparza Lobatos
  *

@@ -50,9 +50,12 @@ void BTN_Interrupt_Init(void(*task)(uint8_t))
 	
 }
 
-void GPIOE_Handler(void) {
-    if (GPIOE->RIS & 0x02) { // Check if PE1 triggered the interrupt
-        BTN_Task(1);         // Pass button state to the task
-        GPIOE->ICR |= 0x02;  // Clear interrupt flag for PE1
-    }
+void GPIOE_Handler(void) 
+{
+  if (GPIOE->RIS & 0x02)
+	{
+  	// Check if PE1 triggered the interrupt
+		BTN_Task(1);
+		GPIOE->ICR |= 0x02;
+	}
 }
