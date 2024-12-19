@@ -1,13 +1,4 @@
-/**
- * @file Sr_Sensor_Interrupt.c
- *
- * @brief Driver for the HC-SR501 PIR Motion Detector
- *
- * @author Gael Esparza Lobatos
- *
- */
- 
- #include "SR_Sensor_Interrupt.h"
+#include "SR_Sensor_Interrupt.h"
 
 
 volatile int motion_detected = 0;

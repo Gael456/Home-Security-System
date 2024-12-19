@@ -38,9 +38,9 @@
  void Play_Note(void)
 {
 	// Note frequency
-	double note = 440.0;
+	double note = 2500.0;
 	// Duration of note
-	unsigned int duration = 100;
+	unsigned int duration = 1100;
 	
 	//Calculates the period in microseconds
 	int period_us = (int) (((double)1/note) * ((double)1000000));
@@ -59,4 +59,5 @@
 void buzzer_controller(void)
 {
 	Play_Note();
+	Delay1ms(900);
 }

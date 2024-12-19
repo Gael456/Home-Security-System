@@ -18,44 +18,52 @@ void BTN_Interrupt_Init(void(*task)(uint8_t))
 	// Enable the clock to port E
 	SYSCTL->RCGCGPIO |= 0x10;
 	
-	// Configure pins 1 as input
-	GPIOE->DIR &= ~0x02;
+	// Configure pins 1 and 2 as input
+	GPIOE->DIR &= ~0x06;
 	
 	// Configure pins PE1 to function as GPIO pins
-	GPIOE->AFSEL &= ~0x02;
+	GPIOE->AFSEL &= ~0x06;
 	
 	// Enable the digital functionality for pins PE1
-	GPIOE->DEN |= 0x02;
+	GPIOE->DEN |= 0x06;
 	
 	// Enable the pull-down resistor
-	GPIOE->PDR |= 0x02;
+	GPIOE->PDR |= 0x06;
 	
 	// Detect edges
-	GPIOE->IS &= ~0x02;
+	GPIOE->IS &= ~0x06;
 	
 	// Single edge detection
-	GPIOE->IBE &= ~0x02;
+	GPIOE->IBE &= ~0x06;
 	
 	// Detect rising edges
-	GPIOE->IEV |= 0x02;
+	GPIOE->IEV |= 0x06;
 	
 	// Clear existing interrupts
-	GPIOE->ICR |= 0x02;
+	GPIOE->ICR |= 0x06;
 	
 	// sends interrupts to interrupt controller
-	GPIOE->IM |= 0x02;
+	GPIOE->IM |= 0x06;
 	
 	// Enable Port E interrupt in NVIC
   NVIC->ISER[0] |= (1 << 4); // Interrupt number for Port E = 4
 	
 }
 
-void GPIOE_Handler(void) 
+uint8_t BTN_READ(void)
 {
-  if (GPIOE->RIS & 0x02)
+	uint8_t btn_state = GPIOE->DATA & 0x06;
+	
+	return btn_state;
+}
+
+void GPIOE_Handler(void) 
+{	
+  if (GPIOE->MIS & 0x06)
 	{
   	// Check if PE1 triggered the interrupt
-		BTN_Task(1);
-		GPIOE->ICR |= 0x02;
+		(*BTN_Task)(BTN_READ());
+		
+		GPIOE->ICR |= 0x06;
 	}
 }

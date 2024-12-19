@@ -419,6 +419,11 @@
               <FileType>1</FileType>
               <FilePath>.\RGB_LED.c</FilePath>
             </File>
+            <File>
+              <FileName>UART0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART0.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -448,6 +453,11 @@
               <FileName>RGB_LED.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\RGB_LED.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\UART0.h</FilePath>
             </File>
           </Files>
         </Group>
